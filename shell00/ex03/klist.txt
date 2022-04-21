@@ -1,0 +1,5 @@
+Credentials cache: API:65C03A61-B9F7-4185-B62A-E14D3DD62584
+        Principal: msoler-e@42BARCELONA.COM
+
+  Issued                Expires               Principal
+Oct 25 14:32:23 2021  Oct 26 00:32:12 2021  krbtgt/42BARCELONA.COM@42BARCELONA.COM

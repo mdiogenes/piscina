@@ -1,0 +1,108 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   found.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 12:20:22 by msoler-e          #+#    #+#             */
+/*   Updated: 2021/11/17 14:24:33 by msoler-e         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include"includes/headers.h"
+
+void	printsquare(char **ptr, int size)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	printf("funcio printsqare");
+	while (x < size)
+	{
+		y = 0;
+		while (y < size)
+		{
+			write(1, &ptr[x][y], 1);
+			y++;
+		}
+		write(1, "\n", 1);
+		x++;
+	}
+	free(ptr);
+}
+
+char **(int size)
+{
+	int	x;
+	int	y;
+	char **table;
+
+	x = 0;
+}
+
+int	foundsquare(int **map, int biggest, int size, int coordx, int coordy)
+{
+	int		x;
+	int		y;
+	char	**ptr;
+
+	ptr = ft_newtablechar(size);
+	ptr = (char **)malloc (size * sizeof(char *));
+	if (!ptr)
+		return (0);
+	x = 0;
+	while (x < size)
+	{
+		ptr[x] = (char *)malloc (size * sizeof (char));
+		if (!ptr[x])
+			return (0);
+		y = 0;
+		while (y < size)
+		{
+			if ((x > (coordx - biggest) && (x <= coordx))
+				&& ((y <= coordy) && (y > (coordy - biggest))))
+				ptr[x][y] = 'x';
+			else
+				ptr[x][y] = map[x][y] + '0';
+			y++;
+		}
+		x++;
+	}
+	printsquare(ptr, size);
+	return (1);
+}
+
+void	biggest_value(int **map, int size)
+{
+	int	x;
+	int	y;
+	int	biggest;
+	int	coordx;
+	int	coordy;
+	int	proba;
+
+	biggest = 0;
+	coordx = 0;
+	coordy = 0;
+	x = 0;
+	while (x < size)
+	{
+		y = 0;
+		while (y < size)
+		{
+			if (biggest < map[x][y + 1])
+			{
+				biggest = map[x][y + 1];
+				coordx = x;
+				coordy = (y + 1);
+			}
+			y++;
+		}
+		x++;
+	}
+	proba = foundsquare(map, biggest, size, coordx, coordy);
+	if (! proba)
+		write(1, "Error MAlloC!", 13);
+}
